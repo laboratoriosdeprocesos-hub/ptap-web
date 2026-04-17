@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function RecomendacionPAC({ setVista }) {
+  useEffect(() => {
+    fetch("https://ptap-backend.onrender.com")
+    .catch(() => {}) //evita errores en consola
+  },[])
   const [planta, setPlanta] = useState("Caldas");
   const [modulo, setModulo] = useState("Módulo 500");
 
