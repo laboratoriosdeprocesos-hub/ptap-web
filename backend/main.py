@@ -190,6 +190,16 @@ def cargar_y_limpiar_excel(config_key: str):
     return df
 
 
+def cargar_cache_excels():
+    cache = {}
+    for key in CONFIGS.keys():
+        cache[key] = cargar_y_limpiar_excel(key)
+    return cache
+
+
+DF_CACHE = cargar_cache_excels()
+
+
 def obtener_tolerancias(config_key):
     if config_key == "Caldas":
         return [
@@ -357,7 +367,7 @@ def recomendar(datos: DatosPAC):
                 detail="Debes enviar alcalinidad_encalada para Diviso."
             )
 
-        df = cargar_y_limpiar_excel(config_key)
+        df = DF_CACHE[config_key].copy()
 
         resultado = calcular_rango_pac(
             df=df,
